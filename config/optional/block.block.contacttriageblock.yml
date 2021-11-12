@@ -5,11 +5,11 @@ dependencies:
     - bhcc_contact_triage
     - ctools
   theme:
-    - bhcc
+    - bhcc_base
 id: contacttriageblock
 theme: bhcc_base
-region: aside
-weight: -28
+region: content
+weight: 10
 provider: null
 plugin: contact_triage_block
 settings:

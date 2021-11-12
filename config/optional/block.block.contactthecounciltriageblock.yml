@@ -7,9 +7,9 @@ dependencies:
   theme:
     - bhcc_base
 id: contactthecounciltriageblock
-theme: bhcc
-region: aside
-weight: -30
+theme: bhcc_base
+region: content
+weight: 12
 provider: null
 plugin: contact_council_block
 settings:
