@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_triage_link
+    - node.type.contact_triage_form
+  module:
+    - bhcc_contact_triage
+id: node.contact_triage_form.field_contact_triage_link
+field_name: field_contact_triage_link
+entity_type: node
+bundle: contact_triage_form
+label: 'Contact triage link'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: contact_triage_link

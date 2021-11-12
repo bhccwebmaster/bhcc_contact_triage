@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - bhcc_contact_triage
+    - system
+  theme:
+    - bhcc_base
+id: contactthecounciltriageblock
+theme: bhcc
+region: aside
+weight: -30
+provider: null
+plugin: contact_council_block
+settings:
+  id: contact_council_block
+  label: 'Contact the council triage block'
+  provider: bhcc_contact_triage
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /contact-council
+    negate: false
+    context_mapping: {  }

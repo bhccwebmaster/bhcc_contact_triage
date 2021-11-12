@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: contact_triage_form
+label: 'Contact triage form'
+type: 'canonical_entities:node'
+pattern: 'contact-council/[node:title]'
+selection_criteria:
+  ed9122e0-b335-4028-9600-b2b761c305ca:
+    id: node_type
+    bundles:
+      contact_triage_form: contact_triage_form
+    negate: false
+    context_mapping:
+      node: node
+    uuid: ed9122e0-b335-4028-9600-b2b761c305ca
+selection_logic: and
+weight: -7
+relationships: {  }
