@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains bhcc_contact_triage module file.
+ */
+
+/* use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\bhcc_localgov_directories\DirectoriesExtraFieldDisplay; */
+use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\Core\Entity\ContentEntityInterface;
+
+
+/**
+ * Implements hook_pathauto_pattern_alter().
+ */
+function bhcc_contact_triage_pathauto_pattern_alter(PathautoPattern $pattern, array $context) {
+
+  // If pathauto isn't set to include this entity into services hierarchy, but
+  // it has opt-ed in with the field add the (optional) parent to the path.
+  $entity = reset($context['data']);
+  assert($entity instanceof ContentEntityInterface);
+  if ($entity->bundle() === 'bhcc_contact_triage' && $entity->hasField('localgov_services_parent') && $entity->localgov_services_parent->target_id && strpos($pattern->getPattern(), '[node:localgov_services_parent:entity:url:relative]') === FALSE) {
+    // Since the main directory pattern adds /directories to the begining,
+    // if that is still set it should be stripped out before adding to the
+    // services hireacy.
+    $root_pattern = $pattern->getPattern();
+
+    $root_pattern = str_replace('contact-council/', '', $root_pattern);
+
+    $pattern->setPattern('[node:localgov_services_parent:entity:url:relative]/' . $root_pattern);
+  }
+}
