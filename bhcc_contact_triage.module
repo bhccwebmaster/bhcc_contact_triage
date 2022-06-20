@@ -29,3 +29,4 @@ function bhcc_contact_triage_pathauto_pattern_alter(PathautoPattern $pattern, ar
 
     $pattern->setPattern('[node:localgov_services_parent:entity:url:relative]/' . $root_pattern);
   }
+}
