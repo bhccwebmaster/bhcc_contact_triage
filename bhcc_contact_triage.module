@@ -5,9 +5,6 @@
  * Contains bhcc_contact_triage module file.
  */
 
-/* use Drupal\node\NodeInterface;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\bhcc_localgov_directories\DirectoriesExtraFieldDisplay; */
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\Core\Entity\ContentEntityInterface;
 
@@ -21,12 +18,15 @@ function bhcc_contact_triage_pathauto_pattern_alter(PathautoPattern $pattern, ar
   // if so strip out contact-council/ from the path
   $entity = reset($context['data']);
   assert($entity instanceof ContentEntityInterface);
+  // if a contact triage form get the url and remove the 1st occurence of 'contact-council/'
   if ($entity->bundle() === 'contact_triage_form' && $entity->hasField('localgov_services_parent') && $entity->localgov_services_parent->target_id && strpos($pattern->getPattern(), '[node:localgov_services_parent:entity:url:relative]') === FALSE) {
 
-    // @todo add comments here
     $root_pattern = $pattern->getPattern();
-
-    $root_pattern = str_replace('contact-council/', '', $root_pattern);
+    if (strpos($root_pattern, 'contact-council/') !== 0 ) {
+      $left = substr($root_pattern, 0, strpos($path, 'contact-council/'));
+      $right = substr($root_pattern, (strpos($path, 'contact-council/') + 16));
+      $root_pattern = $left . $right;
+    }
 
     $pattern->setPattern('[node:localgov_services_parent:entity:url:relative]/' . $root_pattern);
   }
