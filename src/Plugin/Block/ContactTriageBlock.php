@@ -102,6 +102,8 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
 
     $build[] = \Drupal::formBuilder()->getForm('Drupal\bhcc_contact_triage\Form\ContactTriageForm', $links, $question, $format);
 
+    \Drupal::service('page_cache_kill_switch')->trigger();
+
     return $build;
   }
 
@@ -120,9 +122,7 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
   }
 
   
-  public function killpagecache() {
-    $element['#cache']['tags'][] = 'bhcc_form_start:status';
-    \Drupal::service('page_cache_kill_switch')->trigger();
-  }
+    
+  
 
 }

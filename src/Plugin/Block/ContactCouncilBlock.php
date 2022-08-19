@@ -108,6 +108,8 @@ class ContactCouncilBlock extends BlockBase implements ContainerFactoryPluginInt
       ];
     }
 
+    \Drupal::service('page_cache_kill_switch')->trigger();
+
     return $build;
   }
 
