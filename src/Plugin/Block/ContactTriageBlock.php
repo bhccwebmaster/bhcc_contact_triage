@@ -119,5 +119,10 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
     return Cache::mergeTags(parent::getCacheTags(), ['node:' . $this->node->id()]);
   }
 
+  
+  public function killpagecache() {
+    $element['#cache']['tags'][] = 'bhcc_form_start:status';
+    \Drupal::service('page_cache_kill_switch')->trigger();
+  }
 
 }

@@ -36,10 +36,7 @@ class ContactTriageLinkFormatter extends FormatterBase {
         );
       }  
     }
-
-    // Deal with page cache (anon users won't see the change without this).
-    \Drupal::service('page_cache_kill_switch')->trigger();
-
+    
     return $elements;
   }
 }
