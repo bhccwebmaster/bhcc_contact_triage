@@ -36,7 +36,7 @@ class ContactTriageLinkFormatter extends FormatterBase {
         );
       }  
     }
-    
+
     return $elements;
   }
 }

@@ -121,8 +121,4 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
     return Cache::mergeTags(parent::getCacheTags(), ['node:' . $this->node->id()]);
   }
 
-  
-    
-  
-
 }
