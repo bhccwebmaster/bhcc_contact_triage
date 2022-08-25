@@ -1,6 +1,6 @@
 name: 'BHCC Contact triage'
 type: module
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 description: 'An embedded form for directing users who want to contact the council'
 version: 1.0
 package: 'BHCC'
