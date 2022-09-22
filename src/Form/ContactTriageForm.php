@@ -18,19 +18,19 @@ use Drupal\Core\Routing\TrustedRedirectResponse;
  */
 
 class ContactTriageForm extends FormBase {
-	
+
   /**
    * @inheritdoc
    */
   public function getFormId() {
     return 'bhcc_contact_triage_form';
   }
-  
+
   /**
    * @inheritdoc
    */
   public function buildForm(array $form, FormStateInterface $form_state, $triageOptions = NULL, $triageQuestion = NULL, $triageFormat = 'radio') {
- 
+
     $form['#attributes']['class'][] = 'bhcc-contact-form';
 
     $optionArray = [];
@@ -40,33 +40,40 @@ class ContactTriageForm extends FormBase {
     }
 
 
-    $form['link_options'] = Array(
+    $form['link_options'] = [
       '#type' => 'value',
       '#value' => $optionArray,
-    );
+    ];
 
     if($triageFormat == 'radio') {
-      $form['links_radios'] = Array(
+      $form['links_radios'] = [
         '#title' => t($triageQuestion),
         '#type' => 'radios',
         '#options' => $form['link_options']['#value']
-      );
+      ];
     }
 
     if($triageFormat == 'select') {
-      $form['links_radios'] = Array(
+      $form['links_radios'] = [
         '#title' => t($triageQuestion),
         '#type' => 'select',
         '#options' => $form['link_options']['#value']
-      );      
+      ];
     }
 
-    
-    $form['submit'] = Array (
+    $form['actions'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'form-actions',
+        ],
+      ],
+    ];
+
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => 'Next',
-      '#attributes' => ['class' => ['cta-button cta-green webform-button--submit']],
-    );
+    ];
 
     return $form;
 
@@ -79,11 +86,11 @@ class ContactTriageForm extends FormBase {
     $formValue = $form_state->getValue('links_radios');
     if ($formValue == NULL) {
       $form_state->setErrorByName ('links_radios', t('Please select one of the options'));
-      return;		
+      return;
     }
   }
-    
-  
+
+
   /**
    * @inheritdoc
    */
