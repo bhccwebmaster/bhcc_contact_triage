@@ -127,5 +127,4 @@ class ContactCouncilBlock extends BlockBase implements ContainerFactoryPluginInt
     return Cache::mergeTags(parent::getCacheTags(), ['node:' . $this->node->id()]);
   }
 
-
 }
