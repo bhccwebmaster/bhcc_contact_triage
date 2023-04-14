@@ -104,6 +104,13 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
 
     \Drupal::service('page_cache_kill_switch')->trigger();
 
+    // Add additional information.
+    if ($this->node->hasField('bhcc_triage_additional_info')) {
+      $aditional_info = $this->node->get('bhcc_triage_additional_info')->view();
+      $aditional_info['#label_display'] = 'hidden';
+      $build[] = $aditional_info;
+    }
+
     return $build;
   }
 
