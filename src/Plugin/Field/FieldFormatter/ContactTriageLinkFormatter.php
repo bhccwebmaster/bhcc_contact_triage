@@ -31,12 +31,13 @@ class ContactTriageLinkFormatter extends FormatterBase {
         $linkURL = $item->linkURL;
         $linkText = $item->linkText;
 
-        $elements[$delta] = array(
-          '#markup' => $linkURL . ' ' . $linkText
-        );
-      }  
+        $elements[$delta] = [
+          '#markup' => $linkURL . ' ' . $linkText,
+        ];
+      }
     }
 
     return $elements;
   }
+
 }

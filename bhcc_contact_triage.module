@@ -8,18 +8,18 @@
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\Core\Entity\ContentEntityInterface;
 
-
 /**
  * Implements hook_pathauto_pattern_alter().
  */
 function bhcc_contact_triage_pathauto_pattern_alter(PathautoPattern $pattern, array $context) {
 
-// If pathauto isn't set to include this entity into services hierarchy, but
-// it has opt-ed in with the field add the (optional) parent to the path.
-// if so strip out contact-council/ from the path
+  // If pathauto isn't set to include this entity into services hierarchy, but
+  // it has opt-ed in with the field add the (optional) parent to the path.
+  // if so strip out contact-council/ from the path.
   $entity = reset($context['data']);
   assert($entity instanceof ContentEntityInterface);
-  // if a contact triage form get the url and remove the 1st occurence of 'contact-council/'
+  // If a contact triage form get the url and
+  // remove the 1st occurence of 'contact-council/'.
   if ($entity->bundle() === 'contact_triage_form' && $entity->hasField('localgov_services_parent') && $entity->localgov_services_parent->target_id && strpos($pattern->getPattern(), '[node:localgov_services_parent:entity:url:relative]') === FALSE) {
 
     $root_pattern = $pattern->getPattern();

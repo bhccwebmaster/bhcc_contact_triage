@@ -25,20 +25,20 @@ class ContactTriageLinkWidget extends WidgetBase implements WidgetInterface {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
 
-    // Get Delta for this specific entry
+    // Get Delta for this specific entry.
     $values = $items[$delta]->getValue();
 
     $element['linkURL'] = [
       '#type' => 'textfield',
-      '#title' =>  $this->t('Link URL'),
-      '#default_value' => isset($values['linkURL']) ? $values['linkURL'] : '',
-      '#description' => 'For internal links enter the path e.g. /housing or /node/2036. For external links enter the full URL including https://'
+      '#title' => $this->t('Link URL'),
+      '#default_value' => $values['linkURL'] ?? '',
+      '#description' => $this->t('For internal links enter the path e.g. /housing or /node/2036. For external links enter the full URL including https://'),
     ];
 
     $element['linkText'] = [
       '#type' => 'textfield',
-      '#title' =>  $this->t('Link Text'),
-      '#default_value' => isset($values['linkText']) ? $values['linkText'] : ''
+      '#title' => $this->t('Link Text'),
+      '#default_value' => $values['linkText'] ?? '',
     ];
 
     return $element;
