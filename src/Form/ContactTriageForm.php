@@ -7,23 +7,21 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 
 /**
- * Allows users to search for jobs through the Tribepad API.
+ * Provides a contact triage form based on provided options.
+ *
+ * This will usually be from a 'contact triage' node.
  */
 class ContactTriageForm extends FormBase {
 
   /**
-   * Get the form ID of the contact triage.
-   *
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function getFormId() {
     return 'bhcc_contact_triage_form';
   }
 
   /**
-   * Function to build the contact triage form elements.
-   *
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $triageOptions = NULL, $triageQuestion = NULL, $triageFormat = 'radio') {
 
@@ -42,7 +40,7 @@ class ContactTriageForm extends FormBase {
 
     if ($triageFormat == 'radio') {
       $form['links_radios'] = [
-        '#title' => $this->t('%triageQuestion', ['%triageQuestion' => $triageQuestion]),
+        '#title' => $triageQuestion,
         '#type' => 'radios',
         '#options' => $form['link_options']['#value'],
       ];
@@ -50,7 +48,7 @@ class ContactTriageForm extends FormBase {
 
     if ($triageFormat == 'select') {
       $form['links_radios'] = [
-        '#title' => $this->t('%triageQuestion', ['%triageQuestion' => $triageQuestion]),
+        '#title' => $triageQuestion,
         '#type' => 'select',
         '#options' => $form['link_options']['#value'],
       ];
@@ -75,9 +73,7 @@ class ContactTriageForm extends FormBase {
   }
 
   /**
-   * Function to validate the field elements.
-   *
-   * (@inheritdoc)
+   * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $formValue = $form_state->getValue('links_radios');
@@ -88,9 +84,7 @@ class ContactTriageForm extends FormBase {
   }
 
   /**
-   * Function to submit the contact triage form.
-   *
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 

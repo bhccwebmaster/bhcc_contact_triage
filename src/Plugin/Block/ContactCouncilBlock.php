@@ -74,7 +74,7 @@ class ContactCouncilBlock extends BlockBase implements ContainerFactoryPluginInt
   }
 
   /**
-   * MapsBlock constructor.
+   * Contact Council block constructor.
    *
    * @param array $configuration
    *   The configuration to use.
@@ -103,11 +103,10 @@ class ContactCouncilBlock extends BlockBase implements ContainerFactoryPluginInt
     // @todo Move this out of the contrcutor.
     if ($route_match->getParameters()->has('node') && $node = $route_match->getParameter('node')) {
 
-      $node_storage = $this->entityTypeManager->getStorage('node');
       // Make sure this is a node object, otherwise load it.
       // Fix bug DRUP-1237.
       if (!$node instanceof NodeInterface) {
-        $this->node = $node_storage->load((int) $node);
+        $this->node = $this->entityTypeManager->getStorage('node')->load((int) $node);
       }
       $this->node = $node;
     }
