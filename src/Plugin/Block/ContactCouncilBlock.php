@@ -14,7 +14,7 @@ use Drupal\core\Entity\EntityTypeManager;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
- * Provides a search block for Tribepad.
+ * Provides a contact the council block.
  *
  * @Block (
  *   id = "contact_council_block",

@@ -13,7 +13,9 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\core\Entity\EntityTypeManager;
 
 /**
- * Provides a search block for Tribepad.
+ * Provides a contact triage block.
+ *
+ * Options are set dynamically, usually by the 'contact_triage' node.
  *
  * @Block (
  *   id = "contact_triage_block",
@@ -66,7 +68,7 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
   }
 
   /**
-   * MapsBlock constructor.
+   * Contact triage block constructor.
    *
    * @param array $configuration
    *   The configuration to use.
