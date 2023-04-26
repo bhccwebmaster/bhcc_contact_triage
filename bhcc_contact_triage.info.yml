@@ -6,4 +6,6 @@ package: 'BHCC'
 dependencies:
   - drupal:node
   - drupal:block
+  - drupal:options
+  - pathauto:pathauto
   - text_summary_options:text_summary_options
