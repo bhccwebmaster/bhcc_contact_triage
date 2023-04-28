@@ -51,7 +51,7 @@ class ContactTriageBlockTest extends BrowserTestBase {
     $this->drupalLogin($this->adminUser);
 
     // Place the contact triage block.
-    $this->drupalPlaceBlock('contacttriageblock', []);
+    $this->drupalPlaceBlock('contact_triage_block', []);
   }
 
   /**
@@ -59,28 +59,43 @@ class ContactTriageBlockTest extends BrowserTestBase {
    */
   public function testContactTriageBlockDisplays() {
 
-    $triageLinkTitle1 = 'Triage link - ' . $this->randomMachineName(8);
-
     $url_links = [
       [
-        'title' => $triageLinkTitle1,
-        'uri' => 'https://www.brighton-hove.gov.uk/',
+        'linkText' => 'Triage link 1 - ' . $this->randomMachineName(8),
+        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+      ],
+      [
+        'linkText' => 'Triage link 2 - ' . $this->randomMachineName(8),
+        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+      ],
+      [
+        'linkText' => 'Triage link 3 - ' . $this->randomMachineName(8),
+        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
       ],
     ];
-    foreach ($url_links as $url_links) {
-      $this->createNode([
-        'title' => $url_links['title'],
-        'type' => 'contacttriageblock',
-        'status' => NodeInterface::PUBLISHED,
-      ]);
-    }
 
-    // Load the front page.
-    $this->drupalGet('<front>');
+    $question = 'Question - ' . $this->randomMachineName(8);
+    $node = $this->createNode([
+      'title' => $this->randomMachineName(8),
+      'type' => 'contact_triage_form',
+      'field_form_format' => 'radio',
+      'field_contact_triage_question' => $question,
+      'field_contact_triage_link' => $url_links,
+      'status' => NodeInterface::PUBLISHED,
+    ]);
+
+    // Node url.
+    $node_url = $node->toUrl()->toString();
+
+    // Load the contact triage node.
+    $this->drupalGet($node_url);
     $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
 
     // Test that the block is present.
-    $this->assertSession()->pageTextContains($triageLinkTitle1);
+    $this->assertSession()->pageTextContains($question);
+
+    // Test the answers exist.
+    $this->assertSession()->pageTextContains($url_links[0]['linkText']);
   }
 
 }
