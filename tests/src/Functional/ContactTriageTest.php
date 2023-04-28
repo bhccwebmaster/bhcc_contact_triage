@@ -39,14 +39,6 @@ class ContactTriageTest extends BrowserTestBase {
   public function setUp() : void {
     parent::setUp();
 
-    // Create a contact triage content type.
-    $type = $this->container->get('entity_type.manager')->getStorage('node_type')
-      ->create([
-        'title' => 'contact_triage_form',
-        'name' => 'Contact triage form',
-      ]);
-    $type->save();
-
     // Create an admin user.
     $this->adminUser = $this->drupalCreateUser([
       'bypass node access',
@@ -66,28 +58,28 @@ class ContactTriageTest extends BrowserTestBase {
    */
   public function testContactTriageBlockDisplays() {
 
-    // Create some test nodes.
+    $triageLinkTitle1 = 'Triage link - ' . $this->randomMachineName(8);
+
     $url_links = [
       [
-        'title' => 'Brighton & Hove City Council' . $this->randomMachineName(8),
+        'title' => $triageLinkTitle1,
         'uri' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
       ],
     ];
-    // Create and test each link.
     foreach ($url_links as $url_links) {
-      $node[] = $this->createNode([
-        'title' => 'Contact Triage' . $this->randomMachineName(16),
-        'type' => 'contact_triage_form',
+      $this->createNode([
+        'title' => $url_links['title'],
+        'type' => 'contacttriageblock',
         'status' => NodeInterface::PUBLISHED,
       ]);
-
-      // Load the front page.
-      $this->drupalGet('<front>');
-      $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
-
-      // Test that the block is present.
-      $this->assertSession()->pageTextContains('What would you like to contact us about?');
     }
+
+    // Load the front page.
+    $this->drupalGet('<front>');
+    $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
+
+    // Test that the block is present.
+    $this->assertSession()->pageTextContains($triageLinkTitle1);
   }
 
 }
