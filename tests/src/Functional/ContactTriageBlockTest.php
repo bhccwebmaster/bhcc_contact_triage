@@ -10,7 +10,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
 /**
  * Tests for the contact triage blocks.
  */
-class ContactTriageTest extends BrowserTestBase {
+class ContactTriageBlockTest extends BrowserTestBase {
 
   use NodeCreationTrait;
 
@@ -31,6 +31,7 @@ class ContactTriageTest extends BrowserTestBase {
    */
   protected static $modules = [
     'bhcc_contact_triage',
+    'block',
   ];
 
   /**
@@ -63,7 +64,7 @@ class ContactTriageTest extends BrowserTestBase {
     $url_links = [
       [
         'title' => $triageLinkTitle1,
-        'uri' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+        'uri' => 'https://www.brighton-hove.gov.uk/',
       ],
     ];
     foreach ($url_links as $url_links) {
