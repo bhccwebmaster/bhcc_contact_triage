@@ -11,6 +11,9 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\core\Entity\EntityTypeManager;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Provides a contact triage block.
@@ -162,6 +165,17 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
   /**
    * {@inheritdoc}
    */
+  protected function blockAccess(AccountInterface $account) {
+
+    if (!$this->node instanceof NodeInterface || !$this->node->bundle() == 'contact_triage_form') {
+      return AccessResult::forbidden();
+    }
+    return parent::blockAccess($account);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheContexts() {
     return Cache::mergeContexts(parent::getCacheContexts(), ['route']);
   }
@@ -170,7 +184,10 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   public function getCacheTags() {
-    return Cache::mergeTags(parent::getCacheTags(), ['node:' . $this->node->id()]);
+    if ($this->node instanceof NodeInterface) {
+      return Cache::mergeTags(parent::getCacheTags(), ['node:' . $this->node->id()]);
+    }
+    return parent::getCacheTags();
   }
 
 }

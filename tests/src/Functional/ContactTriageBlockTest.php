@@ -62,15 +62,15 @@ class ContactTriageBlockTest extends BrowserTestBase {
     $url_links = [
       [
         'linkText' => 'Triage link 1 - ' . $this->randomMachineName(8),
-        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+        'linkURL' => '/' . $this->randomMachineName(8),
       ],
       [
         'linkText' => 'Triage link 2 - ' . $this->randomMachineName(8),
-        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+        'linkURL' => '/' . $this->randomMachineName(8),
       ],
       [
         'linkText' => 'Triage link 3 - ' . $this->randomMachineName(8),
-        'linkURL' => 'https://www.brighton-hove.gov.uk/' . $this->randomMachineName(8),
+        'linkURL' => '/' . $this->randomMachineName(8),
       ],
     ];
 
@@ -94,8 +94,15 @@ class ContactTriageBlockTest extends BrowserTestBase {
     // Test that the block is present.
     $this->assertSession()->pageTextContains($question);
 
-    // Test the answers exist.
-    $this->assertSession()->pageTextContains($url_links[0]['linkText']);
+    for ($counter = 0; $counter <= 2; $counter++) {
+      // For each loop to check each.
+      $this->assertSession()->pageTextContains($url_links[$counter]['linkText']);
+      $this->submitForm(['links_radios' => $url_links[$counter]['linkURL'] . '~' . $counter], 'Next');
+      $this->assertSession()->addressEquals($url_links[$counter]['linkURL']);
+
+      $this->drupalGet($node_url);
+    }
+
   }
 
 }
