@@ -26,7 +26,7 @@ class ContactTriageForm extends FormBase implements ContainerInjectionInterface 
   /**
    * Constructor.
    *
-   * @param \Drupal\Core\Messenger\MessengerInterface
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   Messenger service.
    */
   public function __construct(MessengerInterface $messenger) {
@@ -101,18 +101,16 @@ class ContactTriageForm extends FormBase implements ContainerInjectionInterface 
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
-  
+
     $formValue = $form_state->getValue('links_radios');
     if ($formValue == NULL) {
 
       // This deletes all errors, but we only want to delete the question.
-      // @todo: find out how to delete specific duplicate error.
+      // @todo find out how to delete specific duplicate error.
       $this->messenger->deleteByType('error');
 
       // Set the error.
       $form_state->setErrorByName('links_radios', $this->t('Please select one of the options'));
-      $form_errors = $form_state->getErrors();
-
       return;
     }
   }
