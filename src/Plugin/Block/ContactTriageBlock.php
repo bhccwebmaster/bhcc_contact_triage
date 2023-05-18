@@ -167,7 +167,7 @@ class ContactTriageBlock extends BlockBase implements ContainerFactoryPluginInte
    */
   protected function blockAccess(AccountInterface $account) {
 
-    if (!$this->node instanceof NodeInterface || !$this->node->bundle() == 'contact_triage_form') {
+    if (!$this->node instanceof NodeInterface || $this->node->bundle() != 'contact_triage_form') {
       return AccessResult::forbidden();
     }
     return parent::blockAccess($account);
