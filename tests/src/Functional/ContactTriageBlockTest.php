@@ -59,17 +59,31 @@ class ContactTriageBlockTest extends BrowserTestBase {
    */
   public function testContactTriageBlockDisplays() {
 
+    // Set up a dummy page we can link to.
+    $this->createContentType(['type' => 'page']);
+    $dummy_node = $this->createNode([
+      'title' => $this->randomMachineName(8),
+      'type' => 'page',
+    ]);
+    $dummy_node_url = $dummy_node->toUrl()->toString();
+
     $url_links = [
+
+      // Test a link to another node.
       [
-        'linkText' => 'Triage link 1 - ' . $this->randomMachineName(8),
-        'linkURL' => '/' . $this->randomMachineName(8),
+        'linkText' => 'Triage link 1 - Node page - ' . $this->randomMachineName(8),
+        'linkURL' => $dummy_node_url,
       ],
+
+      // Test a link to user profile (not a node page).
       [
-        'linkText' => 'Triage link 2 - ' . $this->randomMachineName(8),
-        'linkURL' => '/' . $this->randomMachineName(8),
+        'linkText' => 'Triage link 2 - User profile - ' . $this->randomMachineName(8),
+        'linkURL' => $this->adminUser->toUrl()->toString(),
       ],
+
+      // Test a link to a non node page link 404.
       [
-        'linkText' => 'Triage link 3 - ' . $this->randomMachineName(8),
+        'linkText' => 'Triage link 3 - Any other page (404) - ' . $this->randomMachineName(8),
         'linkURL' => '/' . $this->randomMachineName(8),
       ],
     ];
