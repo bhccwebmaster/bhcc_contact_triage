@@ -90,7 +90,7 @@ class ContactTriageBlockTest extends BrowserTestBase {
 
     $question = 'Question - ' . $this->randomMachineName(8);
     $node = $this->createNode([
-      'title' => $this->randomMachineName(8),
+      'title' => 'Title - ' . $this->randomMachineName(8),
       'type' => 'contact_triage_form',
       'field_form_format' => 'radio',
       'field_contact_triage_question' => $question,
