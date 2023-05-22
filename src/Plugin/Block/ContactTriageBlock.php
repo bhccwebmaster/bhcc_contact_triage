@@ -11,7 +11,6 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\core\Entity\EntityTypeManager;
-use Drupal\node\Entity\Node;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 
