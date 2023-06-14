@@ -3,9 +3,9 @@
 namespace Drupal\Tests\bhcc_contact_triage\Functional;
 
 use Drupal\node\NodeInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Tests for the contact triage blocks.

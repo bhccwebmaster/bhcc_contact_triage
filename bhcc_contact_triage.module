@@ -5,8 +5,8 @@
  * Contains bhcc_contact_triage module file.
  */
 
-use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\pathauto\Entity\PathautoPattern;
 
 /**
  * Implements hook_pathauto_pattern_alter().
