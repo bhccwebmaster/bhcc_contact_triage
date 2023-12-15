@@ -4,7 +4,7 @@ namespace Drupal\bhcc_contact_triage\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
-use Drupal\core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
