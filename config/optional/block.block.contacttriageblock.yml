@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - bhcc_contact_triage
+    - ctools
+  theme:
+    - bhcc_base
+id: contacttriageblock
+theme: bhcc_base
+region: content
+weight: 10
+provider: null
+plugin: contact_triage_block
+settings:
+  id: contact_triage_block
+  label: 'Contact triage block'
+  provider: bhcc_contact_triage
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      contact_triage_form: contact_triage_form
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

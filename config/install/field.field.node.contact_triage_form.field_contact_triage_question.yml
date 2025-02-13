@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_triage_question
+    - node.type.contact_triage_form
+id: node.contact_triage_form.field_contact_triage_question
+field_name: field_contact_triage_question
+entity_type: node
+bundle: contact_triage_form
+label: 'Contact triage question'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 'What would you like to contact us about?'
+default_value_callback: ''
+settings: {  }
+field_type: string

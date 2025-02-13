@@ -1,0 +1,11 @@
+name: 'BHCC Contact triage'
+type: module
+core_version_requirement: ^9 || ^10
+description: 'An embedded form for directing users who want to contact the council'
+package: 'BHCC'
+dependencies:
+  - drupal:node
+  - drupal:block
+  - drupal:options
+  - pathauto:pathauto
+  - text_summary_options:text_summary_options
